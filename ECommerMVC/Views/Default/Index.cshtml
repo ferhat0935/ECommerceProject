@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+@await Component.InvokeAsync("_HeadPartial")
+<body class="animsition">
+	
+	<!-- Header -->
+	@await Component.InvokeAsync("_HeaderPartial")
+	<!-- Sidebar -->
+	@await Component.InvokeAsync("_SideBarPartial")
+
+	<!-- Cart -->
+	@await Component.InvokeAsync("_CardPartial")
+
+	<!-- Slide -->
+	@await Component.InvokeAsync("_SlidePartial")
+
+	
+	<!-- Banner -->
+
+	@await Component.InvokeAsync("_BannerPartial")
+
+	<!-- ProductFilter -->
+	
+	@await Component.InvokeAsync("_ProductFilterPartial")
+
+	<!-- Footer -->
+		@await Component.InvokeAsync("_FooterPartial")
+
+
+	<!-- Back to top -->
+	<div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+	</div>
+
+	<!-- Modal1 -->
+	@await Component.InvokeAsync("_Modal1Partial")
+<!--===============================================================================================-->	
+	@await Component.InvokeAsync("_ScriptPartial")
+
+</body>
+</html>
