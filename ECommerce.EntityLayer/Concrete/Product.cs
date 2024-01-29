@@ -8,6 +8,7 @@ namespace ECommerce.EntityLayer.Concrete
 {
     public class Product:BaseEntity
     {
+        public int GenderId { get; set; }
 
         public int CategoryId { get; set; }
 

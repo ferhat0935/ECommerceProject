@@ -24,7 +24,10 @@ namespace ECommerce.DataAccessLayer.Context
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Category> Categories { get; set; }
+
+        public DbSet<Gender> Genders { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
+       
     }
 
     
