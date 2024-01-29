@@ -39,6 +39,20 @@ namespace ECommerceAPI
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<ICategoryService, CategoryManager>();
 
+            services.AddScoped<IProductViewDal, EfProductViewDal>();
+            services.AddScoped<IProductViewService, ProductViewManager>();
+
+            services.AddAutoMapper(typeof(Startup));
+            //apiconsume iþlemi için onay
+            services.AddCors(opt =>
+            {
+                opt.AddPolicy("CommerceApiCors", opts =>
+                {
+                    opts.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

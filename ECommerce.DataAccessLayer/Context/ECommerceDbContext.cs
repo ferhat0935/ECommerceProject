@@ -19,6 +19,7 @@ namespace ECommerce.DataAccessLayer.Context
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<ProductCategory>().ToView("pr2_view");
+            modelBuilder.Entity<ProductView>().ToView("View_ProductsDetail");
         }
 
         public DbSet<Product> Products { get; set; }
@@ -26,6 +27,8 @@ namespace ECommerce.DataAccessLayer.Context
         public DbSet<Category> Categories { get; set; }
 
         public DbSet<Gender> Genders { get; set; }
+
+        public DbSet<ProductView> ProductViews { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
        
     }

@@ -16,13 +16,16 @@ namespace ECommerceAPI.Controllers
 
         private readonly ICategoryService _categoryservice;
 
+        private readonly IProductViewService _productviewservice;
+
         private readonly ECommerceDbContext _context;
 
-        public DefaultController(IProductService productservice, ICategoryService categoryservice, ECommerceDbContext context)
+        public DefaultController(IProductService productservice, ICategoryService categoryservice, ECommerceDbContext context, IProductViewService productviewservice)
         {
             _productservice = productservice;
             _categoryservice = categoryservice;
             _context = context;
+            _productviewservice = productviewservice;
         }
 
         [HttpGet]
@@ -36,7 +39,7 @@ namespace ECommerceAPI.Controllers
 
         public IActionResult GetCategory()
         {
-            _context.Set<ProductCategory>().ToList();
+            
             var values = _categoryservice.TGetList();
             return Ok(values);
         }
@@ -44,9 +47,27 @@ namespace ECommerceAPI.Controllers
         [HttpGet("View")]
         public IActionResult MyView()
         {
-            var myViewData = _context.ProductCategories.ToList();
+            var myViewData = _productviewservice.TGetList();
             return Ok(myViewData);
         }
+
+
+        [HttpPost]
+        public IActionResult AddProduct(Product product)
+        {
+            _productservice.TInsert(product);
+            return Ok();
+        }
+
+        [HttpPut("updateproduct")]
+
+        public IActionResult UpdateProduct(Product product)
+        {
+            _productservice.TUpdate(product);
+            return Ok();
+        }
+
+
       
     
     }

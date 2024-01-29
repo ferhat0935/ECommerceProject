@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ECommerce.DataAccessLayer.Repository
 {
-    public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         private readonly ECommerceDbContext _context;
 
