@@ -12,24 +12,18 @@ namespace ECommerce.DataAccessLayer.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=FERHATSOLMAZZ\\SQLEXPRESS; Database=StoreDb; User Id=ferhat; Password=12345; TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=FERHATSOLMAZZ\\SQLEXPRESS; Database=ECommerceDb; User Id=ferhat; Password=12345; TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<ProductCategory>().ToView("pr2_view");
-            modelBuilder.Entity<ProductView>().ToView("View_ProductsDetail");
+           
         }
 
-        public DbSet<Product> Products { get; set; }
-
-        public DbSet<Category> Categories { get; set; }
-
-        public DbSet<Gender> Genders { get; set; }
-
-        public DbSet<ProductView> ProductViews { get; set; }
-        public DbSet<ProductCategory> ProductCategories { get; set; }
+       public DbSet<Product> Products { get; set;}
+       public  DbSet<Category> Categories { get; set;}
+    
        
     }
 

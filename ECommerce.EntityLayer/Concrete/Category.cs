@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace ECommerce.EntityLayer.Concrete
 {
-    public class Category:BaseEntity
+    public class Category
     {
+        public int CategoryId { get; set; }
+
         public string CategoryName { get; set; }
 
         public string Description { get; set; }
 
-        public bool IsActive { get; set; }
-
-        public bool FeatureIsActive { get; set; }
+        public bool Status { get; set; }
 
 
+        public ICollection<Product> Products { get; set; }
     }
 }

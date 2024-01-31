@@ -39,8 +39,7 @@ namespace ECommerceAPI
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<ICategoryService, CategoryManager>();
 
-            services.AddScoped<IProductViewDal, EfProductViewDal>();
-            services.AddScoped<IProductViewService, ProductViewManager>();
+   
 
             services.AddAutoMapper(typeof(Startup));
             //apiconsume iþlemi için onay
@@ -71,7 +70,7 @@ namespace ECommerceAPI
             }
 
             app.UseRouting();
-
+            app.UseCors("CommerceApiCors");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

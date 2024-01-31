@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
+using ECommerce.DtoLayer.DTOS;
 using ECommerce.EntityLayer.Concrete;
-using ECommerceMVC.DTO.Category;
-using ECommerceMVC.DTO.Product;
+using ECommerceMVC.DTO.CategoryDto;
+
 
 namespace ECommerceMVC.Mappings
 {
@@ -9,9 +10,8 @@ namespace ECommerceMVC.Mappings
     {
         public AutoMapperConfig()
         {
-            CreateMap<CreateProductDto, ProductView>().ReverseMap();    
-            CreateMap<ResultProductDto, ProductView>().ReverseMap();
-            CreateMap<ResultCategoryDto,Category>().ReverseMap();
+          CreateMap<ResultCategoryDto,Category>().ReverseMap();
+            CreateMap<ProductFilterDto,Product>().ReverseMap();
         }
     }
 }

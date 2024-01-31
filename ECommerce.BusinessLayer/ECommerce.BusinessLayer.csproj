@@ -20,7 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ECommerce.Common\ECommerce.Common.csproj" />
     <ProjectReference Include="..\ECommerce.DataAccessLayer\ECommerce.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\ECommerce.DtoLayer\ECommerce.DtoLayer.csproj" />
     <ProjectReference Include="..\ECommerce.EntityLayer\ECommerce.EntityLayer.csproj" />
   </ItemGroup>
 

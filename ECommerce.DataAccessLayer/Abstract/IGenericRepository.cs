@@ -11,14 +11,15 @@ namespace ECommerce.DataAccessLayer.Abstract
 {
     public interface IGenericRepository<T> where T : class
     {
-        void Insert(T t);
+       
+            Task<IEnumerable<T>> GetAllAsync();
+            Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includeProperties);
+            Task<T> GetByIdAsync(object id);
+            void Create(T entity);
+            void Update(T entity);
+            void Delete(T entity);
+            Task<IEnumerable<T>> FilterAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
+      
 
-        void Delete(T t);
-
-        void Update(T t);
-
-        List<T> GetList();
-
-        T GetById(int id);
     }
 }

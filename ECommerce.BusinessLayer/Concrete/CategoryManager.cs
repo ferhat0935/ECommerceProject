@@ -4,6 +4,7 @@ using ECommerce.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,29 +19,41 @@ namespace ECommerce.BusinessLayer.Concrete
             _categoryDal = categoryDal;
         }
 
-        public void TDelete(Category t)
+        public void TCreate(Category entity)
         {
-            _categoryDal.Delete(t);
+           _categoryDal.Create(entity);
         }
 
-        public Category TGetById(int id)
+        public void TDelete(Category entity)
         {
-          return _categoryDal.GetById(id);
+            _categoryDal.Delete(entity);
         }
 
-        public List<Category> TGetList()
+        public async Task<IEnumerable<Category>> TFilterAsync(Expression<Func<Category, bool>> predicate)
         {
-           return _categoryDal.GetList();
+           return await _categoryDal.FilterAsync(predicate);    
         }
 
-        public void TInsert(Category t)
+       
+
+        public async Task<IEnumerable<Category>> TFindByConditionAsync(Expression<Func<Category, bool>> expression, params Expression<Func<Category, object>>[] includeProperties)
         {
-           _categoryDal.Insert(t);
+            return await _categoryDal.FindByConditionAsync(expression);
         }
 
-        public void TUpdate(Category t)
+        public async Task<IEnumerable<Category>> TGetAllAsync()
         {
-            _categoryDal.Update(t);
+            return await _categoryDal.GetAllAsync();
+        }
+
+        public async Task<Category> TGetByIdAsync(object id)
+        {
+           return await _categoryDal.GetByIdAsync(id);
+        }
+
+        public void TUpdate(Category entity)
+        {
+            _categoryDal.Update(entity);
         }
     }
 }

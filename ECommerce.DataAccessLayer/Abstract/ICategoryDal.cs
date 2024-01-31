@@ -1,5 +1,4 @@
-﻿using ECommerce.DataAccessLayer.Repository;
-using ECommerce.EntityLayer.Concrete;
+﻿using ECommerce.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;

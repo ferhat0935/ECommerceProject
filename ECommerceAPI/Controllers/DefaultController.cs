@@ -1,9 +1,15 @@
 ﻿using ECommerce.BusinessLayer.Abstract;
+using ECommerce.Common.Enums;
 using ECommerce.DataAccessLayer.Context;
+using ECommerce.DtoLayer.DTOS;
 using ECommerce.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace ECommerceAPI.Controllers
@@ -12,63 +18,28 @@ namespace ECommerceAPI.Controllers
     [ApiController]
     public class DefaultController : ControllerBase
     {
-        private readonly IProductService _productservice;
+     
+      private readonly IProductService _productService;
 
-        private readonly ICategoryService _categoryservice;
-
-        private readonly IProductViewService _productviewservice;
-
-        private readonly ECommerceDbContext _context;
-
-        public DefaultController(IProductService productservice, ICategoryService categoryservice, ECommerceDbContext context, IProductViewService productviewservice)
+        public DefaultController(IProductService productService)
         {
-            _productservice = productservice;
-            _categoryservice = categoryservice;
-            _context = context;
-            _productviewservice = productviewservice;
+            _productService = productService;
         }
 
-        [HttpGet]
-        public IActionResult GetProduct(int id)
-        {
-            var values = _productservice.TGetList();
-            return Ok(values);
-        }
-
-        [HttpGet("category")]
-
-        public IActionResult GetCategory()
+     
+       
+        [HttpGet("Filter")]
+        public async Task<IEnumerable<ProductFilterDto>> GetAllProducts(Gender? gender, Color? color, Size? size, decimal? startPrice, decimal? endPrice, string name)
         {
             
-            var values = _categoryservice.TGetList();
-            return Ok(values);
+         
+          
+            var filteredProducts = await _productService.GetProductFilter(gender, color, size, startPrice, endPrice, name);
+            
+            return filteredProducts;
         }
 
-        [HttpGet("View")]
-        public IActionResult MyView()
-        {
-            var myViewData = _productviewservice.TGetList();
-            return Ok(myViewData);
-        }
-
-
-        [HttpPost]
-        public IActionResult AddProduct(Product product)
-        {
-            _productservice.TInsert(product);
-            return Ok();
-        }
-
-        [HttpPut("updateproduct")]
-
-        public IActionResult UpdateProduct(Product product)
-        {
-            _productservice.TUpdate(product);
-            return Ok();
-        }
-
-
-      
-    
+       
     }
+    
 }

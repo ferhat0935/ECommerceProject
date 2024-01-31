@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,14 @@ namespace ECommerce.BusinessLayer.Abstract
 {
     public interface IGenericService<T> where T : class
     {
-        void TInsert(T t);
+        Task<IEnumerable<T>> TGetAllAsync();
+            Task<IEnumerable<T>> TFindByConditionAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includeProperties);
+            Task<T> TGetByIdAsync(object id);
+            void TCreate(T entity);
+            void TUpdate(T entity);
+            void TDelete(T entity);
+            Task<IEnumerable<T>> TFilterAsync(Expression<Func<T, bool>> predicate);
+   
 
-        void TDelete(T t);
-
-        void TUpdate(T t);
-
-        List<T> TGetList();
-
-        T TGetById(int id);
     }
 }

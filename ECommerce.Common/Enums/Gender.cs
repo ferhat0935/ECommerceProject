@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerce.EntityLayer.Concrete
+namespace ECommerce.Common.Enums
 {
-    public class Gender:BaseEntity
+    public enum Gender
     {
-        public string GenderName { get; set; }
+        Erkek,
+        Kadın,
     }
 }
