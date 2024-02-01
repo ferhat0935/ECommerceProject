@@ -11,9 +11,9 @@ namespace ECommerce.DataAccessLayer.Abstract
 {
     public interface IGenericRepository<T> where T : class
     {
-       
-            Task<IEnumerable<T>> GetAllAsync();
-            Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includeProperties);
+
+		    List<T> GetAll();
+		    Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includeProperties);
             Task<T> GetByIdAsync(object id);
             void Create(T entity);
             void Update(T entity);

@@ -11,7 +11,7 @@ namespace ECommerce.BusinessLayer.Abstract
 {
     public interface IGenericService<T> where T : class
     {
-        Task<IEnumerable<T>> TGetAllAsync();
+            List<T> TGetAll();
             Task<IEnumerable<T>> TFindByConditionAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includeProperties);
             Task<T> TGetByIdAsync(object id);
             void TCreate(T entity);

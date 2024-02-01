@@ -8,7 +8,7 @@ namespace ECommerce.Common.Enums
 {
     public enum Gender
     {
-        Erkek,
-        Kadın,
+        Erkek=0,
+        Kadın=1
     }
 }

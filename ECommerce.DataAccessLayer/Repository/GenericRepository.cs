@@ -63,18 +63,18 @@ namespace ECommerce.DataAccessLayer.Repository
             return await _dbSet.Where(expression).ToListAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            return await _dbSet.ToListAsync();
-        }
 
         public async Task<T> GetByIdAsync(object id)
         {
             return await _dbSet.FindAsync(id);
         }
 
+		public List<T> GetAll()
+		{
+			return _context.Set<T>().ToList();
+		}
 
-        public void Update(T entity)
+		public void Update(T entity)
         {
            _context.Update(entity);
            _context.SaveChanges();

@@ -53,8 +53,10 @@ namespace ECommerce.BusinessLayer.Concrete
                 ProductId = p.ProductId,
                 ProductName = p.ProductName,
                 Price = p.Price,
+                CategoryId = p.CategoryId,
                 Description = p.Description,
-                CategoryName = p.Categories.CategoryName
+                CategoryName = p.Categories.CategoryName,
+                Genders=p.Genders
             });
 
             return maleAndRedProductViewModels;
@@ -86,11 +88,12 @@ namespace ECommerce.BusinessLayer.Concrete
             return await _productDal.FindByConditionAsync(expression);
         }
 
-        public async Task<IEnumerable<Product>> TGetAllAsync()
-        {
-           
-            return await _productDal.GetAllAsync();
-        }
+		public List<Product> TGetAll()
+		{
+			return _productDal.GetAll();
+		}
+
+	
 
         public async Task<Product> TGetByIdAsync(object id)
         {

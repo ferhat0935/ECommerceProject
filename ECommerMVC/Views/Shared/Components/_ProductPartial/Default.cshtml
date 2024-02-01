@@ -1,4 +1,6 @@
 ﻿@model List<ProductFilterDto>
+
+
 <section class="bg0 p-t-23 p-b-130">
 	<div class="container">
 		<div class="p-b-10">
@@ -9,18 +11,17 @@
 
 		<div class="flex-w flex-sb-m p-b-52">
 			<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-id="" onclick="ApiIstek(this.dataset.id)">
+				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
 					All Products
 				</button>
 
-				<button class="overview-filter stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-id="1" onclick="ApiIstek(this.dataset.id)" >
+				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
 					Women
 				</button>
-			
-				<button class="overview-filter stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-id="0" onclick="ApiIstek(this.dataset.id)" >
+
+				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
 					Men
 				</button>
-
 
 				<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
 					Bag
@@ -250,44 +251,29 @@
 			</div>
 		</div>
 
-
-		<!-- HTML Form ve Filtreleme Düğmesi -->
-@* 		<form id="filterForm">
-			<label for="gender">Cinsiyet:</label>
-			<select class="form-control"id="gender" name="gender" onchange="ApiIstek()">
-				<option value="Erkek">Erkek</option>
-				<option value="Kadın">Kadın</option>
-			</select>
-			
-
-
-		</form> *@
-
-		<!-- Ürün Listesi Gösterilecek Yer -->
-
-		<div id="productList" class="row ">
-			
-			@foreach (var item in Model)
-			{
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item gender">
+			<div class="row isotope-grid">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0 label-new" data-label="New">
 							<img src="~/Template/images/product-01.jpg" alt="IMG-PRODUCT">
+
 							<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
 							</a>
 						</div>
+
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a href="product-detail.html" id="description2" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-									@item.Description
-									
+								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									a
 								</a>
-								<span class="stext-105 cl3" id="price">
-									@item.Price ₺
-								</span>
+
+								<sapan class="stext-105 cl3">
+									
+								</sapan>
 							</div>
+
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
 									<img class="icon-heart1 dis-block trans-04" src="~/Template/images/icons/icon-heart-01.png" alt="ICON">
@@ -297,82 +283,11 @@
 						</div>
 					</div>
 				</div>
-			}
-		</div>
-
-		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-		<script>
-
-			$(document).ready(function () {
-				// Sayfa yüklendiğinde bir kere çalıştırılacak kısım
-				// ...
-
-				// $("#filterButton").click(function () {
-
-				// 	ApiIstek();
-				// });
-			});
-			function ApiIstek(genderid) {
-				if (genderid === '') {
-				var params = { gender: null };
-				}
-				else {
-					var params = { gender: genderid };
-				}
-				// var gender = $("#gender").val();
-				// var genderValue = (gender.toLowerCase() === "erkek") ? 0 : 1;
-				
-
-				$.ajax({
-					url: 'http://localhost:53239/api/Default/Filter',
-					method: 'GET',
-					data: params,
-					success: function (data) {
-						$("#productList").html(""); // Ürün listesini temizle
-
-						// Her bir ürünü döngü ile gez
-						$.each(data, function (index, item) {
-							// Her bir ürünün verisini kullanarak ürün bloğunu oluştur
-							var productBlock = '<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item gender">' +
-								'<div class="block2">' +
-								'<div class="block2-pic hov-img0 label-new" data-label="New">' +
-								'<img src="Template/images/product-01.jpg" alt="IMG-PRODUCT">' +
-								'<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">Quick View</a>' +
-								'</div>' +
-								'<div class="block2-txt flex-w flex-t p-t-14">' +
-								'<div class="block2-txt-child1 flex-col-l ">' +
-								'<a href="product-detail.html" id="description2" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">' + item.description + '</a>' +
-								'<span class="stext-105 cl3" id="price">' + item.price + '</span>' +
-								'</div>' +
-								'<div class="block2-txt-child2 flex-r p-t-3">' +
-								'<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">' +
-								'<img class="icon-heart1 dis-block trans-04" src="Template/images/icons/icon-heart-01.png" alt="ICON">' +
-								'<img class="icon-heart2 dis-block trans-04 ab-t-l" src="Template/images/icons/icon-heart-02.png" alt="ICON">' +
-								'</a>' +
-								'</div>' +
-								'</div>' +
-								'</div>' +
-								'</div>';
-
-							// Ürün bloğunu listeye ekle
-							$("#productList").append(productBlock);
-						});
-
-						// Başarılı olduğunda yönlendirme yap
-						//alert('AJAX isteği başarıyla tamamlandı!');
-					},
-					error: function (error) {
-						console.error('Hata:', error);
-					}
-				});
-			}
-
-			
-		</script>
 
 
+			</div>
 
-
+        
 
 		<!-- Pagination -->
 		<div class="flex-c-m flex-w w-full p-t-38">
@@ -386,3 +301,46 @@
 		</div>
 	</div>
 </section>
+
+
+
+
+
+@* <div class="row isotope-grid">
+	<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+		<!-- Block2 -->
+		<div class="block2">
+
+			@foreach(var item in Model)
+			{
+				<div class="block2-pic hov-img0 label-new" data-label="New">
+					<img src="~/Template/images/product-01.jpg" alt="IMG-PRODUCT">
+
+					<a href="#" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
+						Quick View
+					</a>
+				</div>
+
+				<div class="block2-txt flex-w flex-t p-t-14">
+					<div class="block2-txt-child1 flex-col-l ">
+						<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+							@item.Description
+						</a>
+
+						<span class="stext-105 cl3">
+							@item.Price
+						</span>
+					</div>
+
+					<div class="block2-txt-child2 flex-r p-t-3">
+						<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
+							<img class="icon-heart1 dis-block trans-04" src="~/Template/images/icons/icon-heart-01.png" alt="ICON">
+							<img class="icon-heart2 dis-block trans-04 ab-t-l" src="~/Template/images/icons/icon-heart-02.png" alt="ICON">
+						</a>
+					</div>
+				</div>
+			}
+			
+		</div>
+	</div>
+</div> *@

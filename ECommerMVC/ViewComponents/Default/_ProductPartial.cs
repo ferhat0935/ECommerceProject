@@ -1,7 +1,4 @@
-﻿
-using ECommerce.Common.Enums;
-using ECommerce.DtoLayer.DTOS;
-using ECommerceMVC.DTO.CategoryDto;
+﻿using ECommerce.DtoLayer.DTOS;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -10,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.ViewComponents.Default
 {
-	public class _BannerPartial:ViewComponent
+	public class _ProductPartial:ViewComponent
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
 
-		public _BannerPartial(IHttpClientFactory httpClientFactory)
+		public _ProductPartial(IHttpClientFactory httpClientFactory)
 		{
 			_httpClientFactory = httpClientFactory;
 		}
@@ -23,7 +20,7 @@ namespace ECommerceMVC.ViewComponents.Default
 		{
 			var client = _httpClientFactory.CreateClient();
 
-			var responseMessage = await client.GetAsync("http://localhost:53239/api/Default/Filter");
+			var responseMessage = await client.GetAsync("http://localhost:53239/api/Default/GetProduct");
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -35,5 +32,4 @@ namespace ECommerceMVC.ViewComponents.Default
 			return View();
 		}
 	}
-
 }

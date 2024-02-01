@@ -1,6 +1,4 @@
-﻿
-using ECommerce.Common.Enums;
-using ECommerce.DtoLayer.DTOS;
+﻿using ECommerce.DtoLayer.DTOS;
 using ECommerceMVC.DTO.CategoryDto;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -10,24 +8,23 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.ViewComponents.Default
 {
-	public class _BannerPartial:ViewComponent
+	public class _CategoryPartial : ViewComponent
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
 
-		public _BannerPartial(IHttpClientFactory httpClientFactory)
+		public _CategoryPartial(IHttpClientFactory httpClientFactory)
 		{
 			_httpClientFactory = httpClientFactory;
 		}
-
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
 			var client = _httpClientFactory.CreateClient();
 
-			var responseMessage = await client.GetAsync("http://localhost:53239/api/Default/Filter");
+			var responseMessage = await client.GetAsync("http://localhost:53239/api/Category");
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ProductFilterDto>>(jsonData);
+				var values = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(jsonData);
 
 
 				return View(values);

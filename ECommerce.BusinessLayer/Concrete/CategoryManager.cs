@@ -19,7 +19,12 @@ namespace ECommerce.BusinessLayer.Concrete
             _categoryDal = categoryDal;
         }
 
-        public void TCreate(Category entity)
+		public List<Category> TGetAll()
+		{
+			return  _categoryDal.GetAll();
+		}
+
+		public void TCreate(Category entity)
         {
            _categoryDal.Create(entity);
         }
@@ -41,10 +46,7 @@ namespace ECommerce.BusinessLayer.Concrete
             return await _categoryDal.FindByConditionAsync(expression);
         }
 
-        public async Task<IEnumerable<Category>> TGetAllAsync()
-        {
-            return await _categoryDal.GetAllAsync();
-        }
+       
 
         public async Task<Category> TGetByIdAsync(object id)
         {
