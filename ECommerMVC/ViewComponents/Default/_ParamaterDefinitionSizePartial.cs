@@ -1,5 +1,4 @@
-﻿using ECommerce.Common.Helpers;
-using ECommerce.DtoLayer.DTOS;
+﻿using ECommerce.DtoLayer.DTOS;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -8,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.ViewComponents.Default
 {
-	public class _ParamaterDefinitionPartial : ViewComponent
+	public class _ParamaterDefinitionSizePartial:ViewComponent
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
-		public _ParamaterDefinitionPartial(IHttpClientFactory httpClientFactory)
+		public _ParamaterDefinitionSizePartial(IHttpClientFactory httpClientFactory)
 		{
 			_httpClientFactory = httpClientFactory;
 		}
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
 			var client = _httpClientFactory.CreateClient();
-			
 
-			var responseMessage = await client.GetAsync("http://localhost:53239/api/Default/ListColor");
-	
+
+			var responseMessage = await client.GetAsync("http://localhost:53239/api/Default/ListSize");
+
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -32,5 +31,4 @@ namespace ECommerceMVC.ViewComponents.Default
 			return View();
 		}
 	}
-
 }

@@ -24,7 +24,7 @@ namespace ECommerce.BusinessLayer.Concrete
             _productDal = productDal;
         }
 
-        public async Task<IEnumerable<ProductFilterDto>> GetProductFilter(Gender? gender,int? categoryId, int? colorId, string? size, decimal? startPrice, decimal? endPrice, string name)
+        public async Task<IEnumerable<ProductFilterDto>> GetProductFilter(Gender? gender,int? categoryId, int? colorId, int? sizeId, decimal? startPrice, decimal? endPrice, string name)
         {
             var productPredicate = PredicateBuilder.New<Product>(x=>x.IsActive);
             Expression<Func<Product, object>>[] includeProperties = { p => p.Categories , s=>s.Size , c=>c.Color};
@@ -38,8 +38,8 @@ namespace ECommerce.BusinessLayer.Concrete
             if (colorId != null)
                 productPredicate.And(s => s.ColorId.Equals(colorId));
 
-            //if (size != null)
-            //    productPredicate.And(s => s.Size.Equals(size));
+            if (sizeId != null)
+                productPredicate.And(s => s.SizeId.Equals(sizeId));
 
             if (startPrice.HasValue)
                 productPredicate.And(s => s.Price >= startPrice.Value); 
@@ -48,7 +48,7 @@ namespace ECommerce.BusinessLayer.Concrete
                 productPredicate.And(s => s.Price <= endPrice.Value);
 
             if (!string.IsNullOrEmpty(name))
-                productPredicate.And(s => s.ProductName.Contains(name));
+                productPredicate.Or(s => s.ProductName.Contains(name));
 
             var maleRead = await _productDal.FilterAsync(productPredicate, includeProperties);
 

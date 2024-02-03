@@ -90,7 +90,7 @@
 				// });
 			});
 			
-				function ApiIstek(genderid, categoryid,colorid) {
+				function ApiIstek(genderid, categoryid,colorid,sizeid) {
 					var params = {};
 
 
@@ -104,7 +104,10 @@
 
 				   if (colorid !== '') {
 					params.colorid = colorid;
-				  }
+				    }
+				   if (sizeid !== '') {
+					params.sizeid = sizeid;
+				   }
 
 
 

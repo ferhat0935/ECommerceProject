@@ -15,7 +15,7 @@ namespace ECommerce.BusinessLayer.Abstract
     public interface IProductService : IGenericService<Product>
     {
 
-        Task<IEnumerable<ProductFilterDto>> GetProductFilter(Gender? gender,int?categoryId, int? colorId, string? size, decimal? startPrice, decimal? endPrice, string name);
+        Task<IEnumerable<ProductFilterDto>> GetProductFilter(Gender? gender,int?categoryId, int? colorId, int? sizeId, decimal? startPrice, decimal? endPrice, string name);
 
     }
 }

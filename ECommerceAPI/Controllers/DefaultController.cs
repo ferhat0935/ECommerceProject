@@ -34,11 +34,11 @@ namespace ECommerceAPI.Controllers
 
 
 		[HttpGet("Filter")]
-		public async Task<IActionResult> FilterProducts([FromQuery] string gender, [FromQuery] int? categoryId, [FromQuery] int? colorId)
+		public async Task<IActionResult> FilterProducts([FromQuery] string gender, [FromQuery] int? categoryId, [FromQuery] int? colorId, [FromQuery] int? sizeId)
 		{
 			// Gender parametresine göre ürünleri filtreleme
 			
-			var filteredProducts = await _productService.GetProductFilter(ParseGender(gender),categoryId,colorId,null,null,null,null);
+			var filteredProducts = await _productService.GetProductFilter(ParseGender(gender),categoryId,colorId, sizeId, null,null,null);
 
 			return Ok(filteredProducts);
 		}
@@ -60,6 +60,13 @@ namespace ECommerceAPI.Controllers
 			var listColor= await _parametersDefinitionService.GetParameters(Constant.Color);
 			return listColor;
 			
+		}
+		[HttpGet("ListSize")]
+		public async Task<List<ParameterDefinition>> GetSize()
+		{
+			var listSize = await _parametersDefinitionService.GetParameters(Constant.Size);
+			return listSize;
+
 		}
 
 	}
