@@ -44,7 +44,7 @@ namespace ECommerce.DataAccessLayer.Repository
         public async Task<IEnumerable<T>> FilterAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
 
-
+            
 
             var query = _context.Set<T>().AsQueryable();
 
@@ -55,10 +55,12 @@ namespace ECommerce.DataAccessLayer.Repository
 
             }
 
-            return await query.Where(predicate).ToListAsync();
+            var a =  await query.Where(predicate).ToListAsync();
+            return a;
         }
 
         public async Task<IEnumerable<T>> FindByConditionAsync(Expression<Func<T, bool>> expression, params Expression<Func<T, object>>[] includeProperties)
+          
         {
             return await _dbSet.Where(expression).ToListAsync();
         }

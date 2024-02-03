@@ -38,10 +38,12 @@ namespace ECommerceAPI
 
             services.AddScoped<ICategoryDal, EfCategoryDal>();
             services.AddScoped<ICategoryService, CategoryManager>();
+            services.AddScoped<IParametersDefinitionService, ParametersDefinitionManager>();
+            services.AddScoped<IParameterDefinitonDal, EfParameterDefinition>();
 
-   
 
-            services.AddAutoMapper(typeof(Startup));
+
+			services.AddAutoMapper(typeof(Startup));
             //apiconsume iþlemi için onay
             services.AddCors(opt =>
             {

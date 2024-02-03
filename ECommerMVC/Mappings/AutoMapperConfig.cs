@@ -10,8 +10,9 @@ namespace ECommerceMVC.Mappings
     {
         public AutoMapperConfig()
         {
-          CreateMap<ResultCategoryDto,Category>().ReverseMap();
+            CreateMap<ResultCategoryDto,Category>().ReverseMap();
             CreateMap<ProductFilterDto,Product>().ReverseMap();
+            CreateMap<ParamaterDefinitionDto,ParameterDefinition>().ReverseMap();
         }
     }
 }

@@ -29,9 +29,11 @@ namespace ECommerce.EntityLayer.Concrete
 
         public Gender Genders { get; set; }
 
-        public Size Sizes { get; set; }
+        public int SizeId { get; set; }
+        public virtual ParameterDefinition Size { get; set; }
 
-        public Color Colors { get; set; }
+        public int ColorId { get; set; }
+		public virtual ParameterDefinition Color { get; set; }
 
         public bool IsActive { get; set; }
 

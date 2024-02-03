@@ -15,4 +15,14 @@ namespace ECommerce.Common.Enums
         Gray=5,
         Red=6
     }
+
+    public class Colors
+    {
+        public static string Black = "Siyah";
+        public static string White = "Beyaz";
+        public static string Blue = "Mavi";
+        public static string Green = "Yeşil";
+        public static string Gray = "Gri";
+        public static string Red = "Kırmızı";
+	}
 }

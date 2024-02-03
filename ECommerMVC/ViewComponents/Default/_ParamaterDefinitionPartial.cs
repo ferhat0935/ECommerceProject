@@ -8,30 +8,28 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.ViewComponents.Default
 {
-	public class _ProductFilterPartial:ViewComponent
+	public class _ParamaterDefinitionPartial : ViewComponent
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
-
-		public _ProductFilterPartial(IHttpClientFactory httpClientFactory)
+		public _ParamaterDefinitionPartial(IHttpClientFactory httpClientFactory)
 		{
 			_httpClientFactory = httpClientFactory;
 		}
-
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
 			var client = _httpClientFactory.CreateClient();
 			var color = new ECommerce.Common.Enums.Color();
-		
-			var responseMessage = await client.GetAsync("http://localhost:53239/api/Default/Filter");
+
+			var responseMessage = await client.GetAsync("http://localhost:53239/api/Default/ListColor");
 			if (responseMessage.IsSuccessStatusCode)
 			{
 				var jsonData = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ProductFilterDto>>(jsonData);
+				var values = JsonConvert.DeserializeObject<List<ParamaterDefinitionDto>>(jsonData);
 
-				string displayName = EnumHelper.GetColorDisplayName(color);
 				return View(values);
 			}
 			return View();
 		}
 	}
+
 }

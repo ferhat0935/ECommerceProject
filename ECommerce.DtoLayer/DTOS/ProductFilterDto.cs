@@ -13,7 +13,6 @@ namespace ECommerce.DtoLayer.DTOS
     {
         public int ProductId { get; set; }
 
-     
         public int CategoryId { get; set; }
 
         public string ProductName { get; set; }
@@ -31,9 +30,12 @@ namespace ECommerce.DtoLayer.DTOS
         public string CategoryName { get; set; }
 
         public Gender Genders { get; set; }
+		public int SizeId { get; set; }
+		public virtual ParameterDefinition Size { get; set; }
 
-        public Size Sizes { get; set; }
+		public int ColorId { get; set; }
+		public virtual ParameterDefinition Color { get; set; }
 
-        public Color Colors { get; set; }
+       
     }
 }

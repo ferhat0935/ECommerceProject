@@ -1,5 +1,4 @@
-﻿using ECommerce.Common;
-using ECommerce.Common.Enums;
+﻿using ECommerce.Common.Enums;
 using ECommerce.DataAccessLayer.Abstract;
 using ECommerce.DtoLayer.DTOS;
 using ECommerce.EntityLayer.Concrete;
@@ -12,10 +11,9 @@ using System.Threading.Tasks;
 
 namespace ECommerce.BusinessLayer.Abstract
 {
-    public interface IProductService : IGenericService<Product>
+    public interface IParametersDefinitionService : IGenericService<ParameterDefinition>
     {
 
-        Task<IEnumerable<ProductFilterDto>> GetProductFilter(Gender? gender,int?categoryId, int? colorId, string? size, decimal? startPrice, decimal? endPrice, string name);
-
+        public Task<List<ParameterDefinition>> GetParameters(string parameterCode);
     }
 }

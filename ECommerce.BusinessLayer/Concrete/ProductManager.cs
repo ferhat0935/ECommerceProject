@@ -1,4 +1,5 @@
 ﻿using ECommerce.BusinessLayer.Abstract;
+using ECommerce.Common;
 using ECommerce.Common.Enums;
 using ECommerce.DataAccessLayer.Abstract;
 using ECommerce.DataAccessLayer.Context;
@@ -23,19 +24,22 @@ namespace ECommerce.BusinessLayer.Concrete
             _productDal = productDal;
         }
 
-        public async Task<IEnumerable<ProductFilterDto>> GetProductFilter(Gender? gender, Color? color, Size? size, decimal? startPrice, decimal? endPrice, string name)
+        public async Task<IEnumerable<ProductFilterDto>> GetProductFilter(Gender? gender,int? categoryId, int? colorId, string? size, decimal? startPrice, decimal? endPrice, string name)
         {
             var productPredicate = PredicateBuilder.New<Product>(x=>x.IsActive);
-            Expression<Func<Product, object>>[] includeProperties = { p => p.Categories };
+            Expression<Func<Product, object>>[] includeProperties = { p => p.Categories , s=>s.Size , c=>c.Color};
 
-            if (gender != null)
+			if (gender != null)
                 productPredicate.And(s => s.Genders.Equals(gender));
 
-            if (color != null)
-                productPredicate.And(s => s.Colors.Equals(color));
+            if (categoryId != null)
+                productPredicate.And(s => s.CategoryId.Equals(categoryId));
 
-            if (size != null)
-                productPredicate.And(s => s.Sizes.Equals(size));
+            if (colorId != null)
+                productPredicate.And(s => s.ColorId.Equals(colorId));
+
+            //if (size != null)
+            //    productPredicate.And(s => s.Size.Equals(size));
 
             if (startPrice.HasValue)
                 productPredicate.And(s => s.Price >= startPrice.Value); 
@@ -56,14 +60,19 @@ namespace ECommerce.BusinessLayer.Concrete
                 CategoryId = p.CategoryId,
                 Description = p.Description,
                 CategoryName = p.Categories.CategoryName,
-                Genders=p.Genders
+                Genders=p.Genders,
+                Color = p.Color,
+                Size = p.Size
+                
+              
+              
             });
 
             return maleAndRedProductViewModels;
         }
 
 
-        public void TCreate(Product entity)
+		public void TCreate(Product entity)
         {
             _productDal.Create(entity);
         }
