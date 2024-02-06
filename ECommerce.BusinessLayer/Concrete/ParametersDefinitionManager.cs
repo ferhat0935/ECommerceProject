@@ -27,12 +27,12 @@ namespace ECommerce.BusinessLayer.Concrete
 
 		public void TCreate(ParameterDefinition entity)
 		{
-			throw new NotImplementedException();
+			_parametersDefinitonDal.Create(entity);
 		}
 
 		public void TDelete(ParameterDefinition entity)
 		{
-			throw new NotImplementedException();
+			_parametersDefinitonDal.Delete(entity);
 		}
 
 		public Task<IEnumerable<ParameterDefinition>> TFilterAsync(Expression<Func<ParameterDefinition, bool>> predicate)
@@ -57,7 +57,7 @@ namespace ECommerce.BusinessLayer.Concrete
 
 		public void TUpdate(ParameterDefinition entity)
 		{
-			throw new NotImplementedException();
+			_parametersDefinitonDal.Update(entity);
 		}
 	}
 }

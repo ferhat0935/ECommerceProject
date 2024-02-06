@@ -17,13 +17,13 @@ using System.Threading.Tasks;
 
 namespace ECommerceAPI.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class DefaultController : ControllerBase
-    {
-     
-      private readonly IProductService _productService;
-      private readonly IParametersDefinitionService _parametersDefinitionService;
+	[Route("api/[controller]")]
+	[ApiController]
+	public class DefaultController : ControllerBase
+	{
+
+		private readonly IProductService _productService;
+		private readonly IParametersDefinitionService _parametersDefinitionService;
 
 		public DefaultController(IProductService productService, IParametersDefinitionService parametersDefinitionService)
 		{
@@ -34,16 +34,25 @@ namespace ECommerceAPI.Controllers
 
 
 		[HttpGet("Filter")]
-		public async Task<IActionResult> FilterProducts([FromQuery] string gender, [FromQuery] int? categoryId, [FromQuery] int? colorId, [FromQuery] int? sizeId)
+		public async Task<IActionResult> FilterProducts([FromQuery] string gender, [FromQuery] int? categoryId, [FromQuery] int? colorId, [FromQuery] int? sizeId, [FromQuery] int? productId)
 		{
-			// Gender parametresine göre ürünleri filtreleme
-			
-			var filteredProducts = await _productService.GetProductFilter(ParseGender(gender),categoryId,colorId, sizeId, null,null,null);
+
+
+			var filteredProducts = await _productService.GetProductFilter(ParseGender(gender), categoryId, colorId, sizeId, productId, null, null, null);
 
 			return Ok(filteredProducts);
 		}
+        [HttpGet("FilterProducts")]
+        public async Task<IActionResult> GetProducts([FromQuery] int productId)
+        {
 
-		private Gender? ParseGender(string gender)
+
+            var filteredProducts = await _productService.GetProduct(productId);
+
+            return Ok(filteredProducts);
+        }
+
+        private Gender? ParseGender(string gender)
 		{
 			// İlgili string değeri Gender enum değerine çevirme
 			if (Enum.TryParse<Gender>(gender, true, out var parsedGender))
@@ -51,15 +60,15 @@ namespace ECommerceAPI.Controllers
 				return parsedGender;
 			}
 
-			
+
 			return null;
 		}
 		[HttpGet("ListColor")]
 		public async Task<List<ParameterDefinition>> GetColors()
 		{
-			var listColor= await _parametersDefinitionService.GetParameters(Constant.Color);
+			var listColor = await _parametersDefinitionService.GetParameters(Constant.Color);
 			return listColor;
-			
+
 		}
 		[HttpGet("ListSize")]
 		public async Task<List<ParameterDefinition>> GetSize()
@@ -69,11 +78,18 @@ namespace ECommerceAPI.Controllers
 
 		}
 
+		[HttpGet("{id}")]
+		public  IActionResult Products(int id)
+		{
+			_productService.TGetByIdAsync(id);
+			return Ok();
+
+		}
+
+
+	
+
 	}
 
-	//gerekli apiler
-	//1-GetColors servici
-	//2-sizeservice yukardaki gibi
-	//int?sizeID
-	//İNT*colorId
+	
 }

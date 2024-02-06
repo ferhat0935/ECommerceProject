@@ -81,5 +81,19 @@ namespace ECommerce.DataAccessLayer.Repository
            _context.Update(entity);
            _context.SaveChanges();
         }
+
+        public async Task<T> FilterAsyncData(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        {
+            var query = _context.Set<T>().AsQueryable();
+
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+
+            var result = await query.FirstOrDefaultAsync(predicate);
+            return result;
+        }
+
     }
 }

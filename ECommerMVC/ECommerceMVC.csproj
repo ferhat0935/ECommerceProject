@@ -27,4 +27,8 @@
     <ProjectReference Include="..\ECommerce.EntityLayer\ECommerce.EntityLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Product\" />
+  </ItemGroup>
+
 </Project>
