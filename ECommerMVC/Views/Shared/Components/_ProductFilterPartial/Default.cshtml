@@ -1,6 +1,7 @@
 ﻿@using ECommerce.Common.Helpers
-@model List<ProductFilterDto>
-
+@* @model List<ProductFilterDto> *@
+	@using ECommerceMVC.Models.ProductModel
+@model Tuple<List<ProductFilterDto>, List<CategoryDto>>
 <section class="bg0 p-t-23 p-b-130">
 	<div class="container">
 
@@ -26,7 +27,7 @@
 					Erkek
 				</button>
 					
-				@foreach(var item in Model)
+				@foreach(var item in Model.Item2)
 				{
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-categoryid="@item.CategoryId" onclick="ApiIstek('', this.dataset.categoryid)">
 						@item.CategoryName
@@ -34,6 +35,7 @@
 
 
 				}
+				@* @await Component.InvokeAsync("_ProductCategoryPartial") *@
 				
 			</div>
 
@@ -45,7 +47,7 @@
 
 		<div id="productList" class="row ">
 			
-			@foreach (var item in Model)
+			@foreach (var item in Model.Item1)
 			{
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item gender">
 					<!-- Block2 -->
