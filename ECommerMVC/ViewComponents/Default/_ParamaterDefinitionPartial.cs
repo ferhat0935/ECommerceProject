@@ -1,5 +1,7 @@
 ﻿using ECommerce.Common.Helpers;
 using ECommerce.DtoLayer.DTOS;
+using ECommerceMVC.Models;
+using ECommerceMVC.Models.ParamaterDefinitionModel;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -18,19 +20,37 @@ namespace ECommerceMVC.ViewComponents.Default
 		public async Task<IViewComponentResult> InvokeAsync()
 		{
 			var client = _httpClientFactory.CreateClient();
-			
 
-			var responseMessage = await client.GetAsync("http://localhost:53239/api/Default/ListColor");
-	
-			if (responseMessage.IsSuccessStatusCode)
+			// Renk listesini alma
+			var colorResponse = await client.GetAsync("http://localhost:53239/api/Default/ListColor");
+			List<ParamaterDefinitionDto> colorList = new List<ParamaterDefinitionDto>();
+
+			if (colorResponse.IsSuccessStatusCode)
 			{
-				var jsonData = await responseMessage.Content.ReadAsStringAsync();
-				var values = JsonConvert.DeserializeObject<List<ParamaterDefinitionDto>>(jsonData);
-
-				return View(values);
+				var jsonData = await colorResponse.Content.ReadAsStringAsync();
+				colorList = JsonConvert.DeserializeObject<List<ParamaterDefinitionDto>>(jsonData);
 			}
-			return View();
+
+			// Boyut listesini alma
+			var sizeResponse = await client.GetAsync("http://localhost:53239/api/Default/ListSize");
+			List<ParamaterDefinitionDto> sizeList = new List<ParamaterDefinitionDto>();
+
+			if (sizeResponse.IsSuccessStatusCode)
+			{
+				var jsonData = await sizeResponse.Content.ReadAsStringAsync();
+				sizeList = JsonConvert.DeserializeObject<List<ParamaterDefinitionDto>>(jsonData);
+			}
+
+			// ViewModel oluşturun
+			var viewModel = new ParamaterDefinitionModel
+			{
+				ColorList = colorList,
+				SizeList = sizeList
+			};
+
+			return View(viewModel);
 		}
+
 	}
 
 }

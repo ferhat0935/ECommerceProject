@@ -78,14 +78,7 @@ namespace ECommerceAPI.Controllers
 
 		}
 
-		[HttpGet("{id}")]
-		public  IActionResult Products(int id)
-		{
-			_productService.TGetByIdAsync(id);
-			return Ok();
-
-		}
-
+	
 
 	
 
