@@ -59,6 +59,10 @@ namespace ECommerce.BusinessLayer.Concrete
             return productViewModel;
         }
 
+        public Task<int> TGetProductCountByCategoryIdAsync(int categoryId)
+        {
+          return _productDal.GetProductCountByCategoryIdAsync(categoryId);
+        }
 
         public async Task<IEnumerable<ProductFilterDto>> GetProductFilter(Gender? gender,int? categoryId, int? colorId, int? sizeId, int? productId, decimal? startPrice, decimal? endPrice, string name)
         {

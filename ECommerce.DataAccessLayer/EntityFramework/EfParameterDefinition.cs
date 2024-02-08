@@ -11,18 +11,14 @@ using System.Threading.Tasks;
 
 namespace ECommerce.DataAccessLayer.EntityFramework
 {
-    public class EfProductDal:GenericRepository<Product>,IProductDal
+    public class EfParameterDefinition : GenericRepository<ParameterDefinition>,IParameterDefinitonDal
     {
-        public EfProductDal(ECommerceDbContext context):base(context)
+        public EfParameterDefinition(ECommerceDbContext context):base(context)
         {
 
         }
-       //public async Task<IEnumerable<Product>> IncludeProduct(Product product)
-       // {
-       //         var model = new Category();
-       //         return  model.Products = context.Products.Include(i => i.Categories).ToList();
-            
-       // }
+
+
 
     }
 }

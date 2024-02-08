@@ -13,13 +13,24 @@ namespace ECommerce.BusinessLayer.Concrete
     public class CategoryManager : ICategoryService
     {
         private readonly ICategoryDal _categoryDal;
+        private readonly IProductDal _productDal;
 
-        public CategoryManager(ICategoryDal categoryDal)
+        public async Task<bool> CanDeleteCategory(int categoryId)
         {
-            _categoryDal = categoryDal;
+            // Kategoriye bağlı ürün sayısını kontrol et
+            int productCount = await _productDal.GetProductCountByCategoryIdAsync(categoryId);
+
+            // Eğer kategoriye bağlı ürün varsa, silme işlemini engelle
+            return productCount == 0;
         }
 
-		public List<Category> TGetAll()
+        public CategoryManager(ICategoryDal categoryDal, IProductDal productDal)
+        {
+            _categoryDal = categoryDal;
+            _productDal = productDal;
+        }
+
+        public List<Category> TGetAll()
 		{
 			return  _categoryDal.GetAll();
 		}

@@ -11,12 +11,22 @@ using System.Threading.Tasks;
 
 namespace ECommerce.DataAccessLayer.EntityFramework
 {
-    public class EfParameterDefinition : GenericRepository<ParameterDefinition>,IParameterDefinitonDal
+    public class EfProductDal:GenericRepository<Product>,IProductDal
     {
-        public EfParameterDefinition(ECommerceDbContext context):base(context)
+        public EfProductDal(ECommerceDbContext context):base(context)
         {
 
         }
+
+        public async Task<int> GetProductCountByCategoryIdAsync(int categoryId)
+        {
+            var context = new ECommerceDbContext();
+            int productCount = await context.Products
+            .Where(p => p.CategoryId == categoryId)
+            .CountAsync();
+            return productCount;
+        }
+    
 
     }
 }

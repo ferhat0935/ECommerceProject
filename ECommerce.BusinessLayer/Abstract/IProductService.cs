@@ -19,6 +19,8 @@ namespace ECommerce.BusinessLayer.Abstract
 
         Task<ProductFilterDto> GetProduct(int productId);
 
+        Task<int> TGetProductCountByCategoryIdAsync(int categoryId);
+
 
     }
 }

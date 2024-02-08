@@ -9,5 +9,6 @@ namespace ECommerce.DataAccessLayer.Abstract
 {
     public interface IProductDal:IGenericRepository<Product>
     {
+        Task<int> GetProductCountByCategoryIdAsync(int categoryId);
     }
 }
