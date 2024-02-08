@@ -17,6 +17,6 @@ namespace ECommerce.EntityLayer.Concrete
         public bool Status { get; set; }
 
 
-        public ICollection<Product> Products { get; set; }
+        public ICollection<Product> Products { get; set; } = new List<Product>();
     }
 }

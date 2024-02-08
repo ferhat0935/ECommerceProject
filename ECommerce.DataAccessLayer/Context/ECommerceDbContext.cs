@@ -12,7 +12,7 @@ namespace ECommerce.DataAccessLayer.Context
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=FERHATSOLMAZZ\\SQLEXPRESS; Database=ECommerceDb; User Id=ferhat; Password=12345; TrustServerCertificate=True");
+            optionsBuilder.UseSqlServer("Server=FERHATSOLMAZZ\\SQLEXPRESS; Database=ECommerceDb; User Id=ferhat; Password=123456; TrustServerCertificate=True");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

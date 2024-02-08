@@ -25,7 +25,7 @@ namespace ECommerce.EntityLayer.Concrete
 
         public int StockQuantity { get; set; }
 
-        public  virtual Category Categories { get; set; }
+        public virtual Category Categories { get; set; }
 
         public Gender Genders { get; set; }
 
