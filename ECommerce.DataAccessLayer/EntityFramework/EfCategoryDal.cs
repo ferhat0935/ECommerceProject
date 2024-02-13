@@ -16,5 +16,11 @@ namespace ECommerce.DataAccessLayer.EntityFramework
         {
             
         }
+
+        public int GetCategoryCount()
+        {
+            var context = new ECommerceDbContext();
+            return context.Products.Count();
+        }
     }
 }

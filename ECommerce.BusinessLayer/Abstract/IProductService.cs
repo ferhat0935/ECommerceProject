@@ -1,7 +1,7 @@
 ﻿using ECommerce.Common;
 using ECommerce.Common.Enums;
 using ECommerce.DataAccessLayer.Abstract;
-using ECommerce.DtoLayer.DTOS;
+using ECommerce.DtoLayer.DTOS.ProductDtos;
 using ECommerce.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;

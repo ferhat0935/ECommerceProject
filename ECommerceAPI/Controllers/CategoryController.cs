@@ -1,14 +1,16 @@
 ﻿using ECommerce.BusinessLayer.Abstract;
+
 using ECommerce.EntityLayer.Concrete;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace ECommerceAPI.Controllers
 {
-	[Route("api/[controller]")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class CategoryController : ControllerBase
 	{
@@ -24,25 +26,26 @@ namespace ECommerceAPI.Controllers
 		public IActionResult GetCategory()
 		{
 			var values=_categoryService.TGetAll();
-			
+          
 			return Ok(values);
 		}
 
-		[HttpPost]
-		public IActionResult AddCategory(Category category)
-		{
-			//Category entity = new Category()
-			//{
-			//	CategoryName = "mert",
-			//	Description = category.Description,
-				
-			//};
-			_categoryService.TCreate(category);
-			return Ok();
-		}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCategory(int id)
+        {
+            var values = await _categoryService.TGetByIdAsync(id);
 
-     
+            return Ok(values);
+        }
 
+
+        [HttpGet("GetCategoryCount")]
+        public IActionResult CategoryCount()
+        {
+            var values = _categoryService.TGetCategoryCount();
+            return Ok(values);
+        }
+		
         [HttpDelete("{id}")]
 		public async Task<IActionResult> DeleteCategory(int id)
 		{
@@ -62,11 +65,26 @@ namespace ECommerceAPI.Controllers
             }
             catch (Exception ex)
             {
-                // Hata durumunu loglama veya başka bir işlem yapabilirsiniz.
-               
+
                 return RedirectToAction("GetCategories", "AdminCategory");
             }
 
         }
+
+
+        [HttpPut("UpdateCategory")]
+        public IActionResult UpdateCategory(Category category)
+        {
+            _categoryService.TUpdate(category);
+            return Ok();
+        }
+
+
+		[HttpPost("AddCategory")]
+		public IActionResult AddCategory(Category category)
+		{
+			_categoryService.TCreate(category);
+			return Ok();
+		}
 	}
 }

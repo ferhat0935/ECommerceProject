@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System;
 using ECommerce.Common;
 using System.Diagnostics.Contracts;
+using ECommerce.DtoLayer.DTOS.ProductDtos;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace ECommerceAPI.Controllers
 {
@@ -15,68 +17,48 @@ namespace ECommerceAPI.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        //private readonly IProductService _productService;
-        //private readonly IParametersDefinitionService _parametersDefinitionService;
+        private readonly IProductService _productService;
+      
 
-        //public ProductController(IProductService productService, IParametersDefinitionService parametersDefinitionService)
-        //{
-        //    _productService = productService;
-        //    _parametersDefinitionService = parametersDefinitionService;
-        //}
+        public ProductController(IProductService productService)
+        {
+            _productService = productService;
+          
+        }
 
-
-
-        //[HttpGet("Filter")]
-        //public async Task<IActionResult> FilterProducts([FromQuery] string gender, [FromQuery] int? categoryId, [FromQuery] int? colorId, [FromQuery] int? sizeId, [FromQuery] int? productId)
-        //{
-
-
-        //    var filteredProducts = await _productService.GetProductFilter(ParseGender(gender), categoryId, colorId, sizeId, productId, null, null, null);
-
-        //    return Ok(filteredProducts);
-        //}
-        //[HttpGet("FilterProducts")]
-        //public async Task<IActionResult> GetProducts([FromQuery] int productId)
-        //{
+        [HttpGet]
+        public async Task<IActionResult> GetProducts([FromQuery] string gender, [FromQuery] int? categoryId, [FromQuery] int? colorId, [FromQuery] int? sizeId, [FromQuery] int? productId)
+        {
+           
 
 
-        //    var filteredProducts = await _productService.GetProduct(productId);
+            var filteredProducts = await _productService.GetProductFilter(null, null, null, null, null, null, null, null);
 
-        //    return Ok(filteredProducts);
-        //}
-
-        //private Gender? ParseGender(string gender)
-        //{
-        //    // İlgili string değeri Gender enum değerine çevirme
-        //    if (Enum.TryParse<Gender>(gender, true, out var parsedGender))
-        //    {
-        //        return parsedGender;
-        //    }
-
-
-        //    return null;
-        //}
-        //[HttpGet("ListColor")]
-        //public async Task<List<ParameterDefinition>> GetColors()
-        //{
-        //    var listColor = await _parametersDefinitionService.GetParameters(Constant.Color);
-        //    return listColor;
-
-        //}
-        //[HttpGet("ListSize")]
-        //public async Task<List<ParameterDefinition>> GetSize()
-        //{
-        //    var listSize = await _parametersDefinitionService.GetParameters(Constant.Size);
-        //    return listSize;
-
-        //}
+            return Ok(filteredProducts);
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(int id)
+        {
+            var values = await _productService.TGetByIdAsync(id);
+            _productService.TDelete(values);
+            return Ok(values);
+             
+        }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetProduct(int id)
+        {
+            var filteredProducts = await _productService.GetProduct(id);
+            return Ok(filteredProducts);
+        }
 
 
-        //[HttpPost]
-        //public IActionResult AddProduct(Product product)
-        //{
-        //    _productService.TCreate(product);
-        //    return Ok();
-        //}
+        [HttpPut("UpdateProduct")]
+        public IActionResult UpdateCategory(Product product)
+        {
+            _productService.TUpdate(product);
+            return Ok();
+        }
+
+
     }
 }

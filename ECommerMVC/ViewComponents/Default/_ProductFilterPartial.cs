@@ -1,5 +1,7 @@
 ﻿using ECommerce.Common.Helpers;
-using ECommerce.DtoLayer.DTOS;
+
+using ECommerce.DtoLayer.DTOS.ProductDtos;
+using ECommerceMVC.DTO.CategoryDto;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.ViewComponents.Default
 {
-	public class _ProductFilterPartial:ViewComponent
+    public class _ProductFilterPartial:ViewComponent
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
 
@@ -33,15 +35,15 @@ namespace ECommerceMVC.ViewComponents.Default
 
 			
 			var responseCategory = await client.GetAsync("http://localhost:53239/api/Category");
-			List<CategoryDto> categoryDtos = new List<CategoryDto>();
+			List<ResultCategoryDto> categoryDtos = new List<ResultCategoryDto>();
 			if (responseCategory.IsSuccessStatusCode)
 			{
 				var categoryData = await responseCategory.Content.ReadAsStringAsync();
-				categoryDtos = JsonConvert.DeserializeObject<List<CategoryDto>>(categoryData);
+				categoryDtos = JsonConvert.DeserializeObject<List<ResultCategoryDto>>(categoryData);
 			}
 
 			
-			var viewModel = new Tuple<List<ProductFilterDto>, List<CategoryDto>>(productFilterDtos, categoryDtos);
+			var viewModel = new Tuple<List<ProductFilterDto>, List<ResultCategoryDto>>(productFilterDtos, categoryDtos);
 
 			return View(viewModel);
 		}

@@ -1,7 +1,5 @@
-﻿@using ECommerce.Common.Helpers
-@* @model List<ProductFilterDto> *@
-	@using ECommerceMVC.Models.ProductModel
-@model Tuple<List<ProductFilterDto>, List<CategoryDto>>
+﻿
+@model Tuple<List<ProductFilterDto>, List<ResultCategoryDto>>
 <section class="bg0 p-t-23 p-b-130">
 	<div class="container">
 
@@ -27,7 +25,7 @@
 					Erkek
 				</button>
 					
-				@foreach(var item in Model.Item2)
+				@foreach (var item in Model.Item2.Take(3))
 				{
 					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-categoryid="@item.CategoryId" onclick="ApiIstek('', this.dataset.categoryid)">
 						@item.CategoryName

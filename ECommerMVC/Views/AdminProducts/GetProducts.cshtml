@@ -1,9 +1,10 @@
-﻿@{
-    ViewData["Title"] = "GetCategories";
+﻿@model List<ResultProductDto>
+@{
+    ViewData["Title"] = "GetProducts";
     Layout = "~/Views/AdminLayout/AdminLayout.cshtml";
     int count = 0;
 }
-@model List<ResultCategoryDto>
+
 <section class="content">
     <div class="container-fluid">
         <div class="row">
@@ -22,8 +23,15 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
+                                        <th>Ürün Ad</th>
                                         <th>Kategori Ad</th>
+                                        <th>Fiyat</th>
                                         <th>Açıklama</th>
+                                        <th>Tarih</th>
+                                        <th>Stok Adedi</th>
+                                        <th>Cinsiyet</th>
+                                        <th>Size</th>
+                                        <th>Renk</th>
                                         <th>Sil</th>
                                         <th>Güncelle</th>
                                     </tr>
@@ -34,20 +42,27 @@
                                     <tbody>
                                         <tr>
                                             <td><a>@count</a></td>
+                                            <td>@item.ProductName</td>
                                             <td>@item.CategoryName</td>
-                                            <td><span class="badge badge-success">@item.Description</span></td>
-                                            <td><a href="/AdminCategory/DeleteCategory/@item.CategoryId" class="btn btn-block btn-danger">Sil</a></td>
-                                            <td><a href="/AdminCategory/UpdateCategory/@item.CategoryId" class="btn btn-block btn-warning">Güncelle</a></td>
+                                            <td>@item.Price</td>
+                                            <td>@item.Description</td>
+                                            <td>@(((DateTime)item.CreatedDate).ToString("dd-MMM-yyyy"))</td>
+                                            <td>@item.StockQuantity</td>
+                                            <td>@item.Genders</td>
+                                            <td>@item.Size.ParameterValue</td>
+                                            <td>@item.Color.ParameterValue</td>
+                                            <td><a href="/AdminProducts/DeleteProduct/@item.ProductId" class="btn btn-block btn-danger">Sil</a></td>
+                                            <td><a href="/AdminProducts/UpdateProduct/@item.CategoryId" class="btn btn-block btn-warning">Güncelle</a></td>
                                         </tr>
 
                                     </tbody>
                                 }
                             </table>
-                         
+
                         </div>
                     </div>
                     <div class="card-footer clearfix">
-                        <a href="/AdminCategory/CreateCategory" class="btn btn-sm btn-info float-left">Yeni Kategori Ekle</a>
+                        <a href="/AdminCategory/CreateCategory" class="btn btn-sm btn-info float-left">Yeni Ürün Ekle</a>
                         @*   <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a> *@
                     </div>
                 </div>
@@ -55,5 +70,4 @@
         </div>
     </div>
 </section>
-
 

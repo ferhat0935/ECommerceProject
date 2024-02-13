@@ -37,16 +37,26 @@
 			<div class="mtext-102 cl2 p-b-15">
 				Size
 			</div>
+			@{
+				List<string> uniqueParameterValues = new List<string>();
+			}
+
 			@foreach (var item in Model.SizeList)
 			{
-				<ul>
-					<li class="p-b-6">
-						<button class="overview-filter stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-sizeid=@item.Id onclick="ApiIstek('','','',this.dataset.sizeid)">
-							@item.ParameterValue
-						</button>
-					</li>
-				</ul>
+				@if (!uniqueParameterValues.Contains(item.ParameterValue))
+				{
+					uniqueParameterValues.Add(item.ParameterValue);
+
+					<ul>
+						<li class="p-b-6">
+							<button class="overview-filter stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-sizeid=@item.Id onclick="ApiIstek('','','',this.dataset.sizeid)">
+								@item.ParameterValue
+							</button>
+						</li>
+					</ul>
+				}
 			}
+
 
 		</div>
 
@@ -66,10 +76,7 @@
 					@* <a href="#" class="filter-link stext-106 trans-04">
 						$0.00 - $50.00
 					</a> *@
-					
-						
 
-					
 				</li>
 
 				<li class="p-b-6">

@@ -13,7 +13,7 @@ namespace ECommerce.DataAccessLayer.EntityFramework
 {
     public class EfProductDal:GenericRepository<Product>,IProductDal
     {
-        public EfProductDal(ECommerceDbContext context):base(context)
+        public EfProductDal(ECommerceDbContext context) : base(context)
         {
 
         }

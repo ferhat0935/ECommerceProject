@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ECommerce.DtoLayer.DTOS
+namespace ECommerce.DtoLayer.DTOS.ProductDtos
 {
     public class ProductFilterDto
     {
@@ -21,7 +21,7 @@ namespace ECommerce.DtoLayer.DTOS
 
         public string Description { get; set; }
 
-        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime CreatedDate { get; set; } 
 
         public int StockQuantity { get; set; }
 
@@ -30,12 +30,12 @@ namespace ECommerce.DtoLayer.DTOS
         public string CategoryName { get; set; }
 
         public Gender Genders { get; set; }
-		public int SizeId { get; set; }
-		public virtual ParameterDefinition Size { get; set; }
+        public int SizeId { get; set; }
+        public virtual ParameterDefinition Size { get; set; }
 
-		public int ColorId { get; set; }
-		public virtual ParameterDefinition Color { get; set; }
+        public int ColorId { get; set; }
+        public virtual ParameterDefinition Color { get; set; }
 
-       
+
     }
 }

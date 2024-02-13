@@ -1,4 +1,4 @@
-﻿using ECommerceMVC.DTO.ProducrDto;
+﻿using ECommerceMVC.DTO.ProductDto;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;

@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce.DataAccessLayer",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce.BusinessLayer", "ECommerce.BusinessLayer\ECommerce.BusinessLayer.csproj", "{6A589D68-DD3B-4F8A-86E7-D75CC693B99C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Common", "ECommerce.Common\ECommerce.Common.csproj", "{3598A813-2B60-404C-A0D3-BC63E3D0F492}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce.Common", "ECommerce.Common\ECommerce.Common.csproj", "{3598A813-2B60-404C-A0D3-BC63E3D0F492}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

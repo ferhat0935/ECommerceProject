@@ -10,5 +10,6 @@ namespace ECommerce.BusinessLayer.Abstract
     public interface ICategoryService:IGenericService<Category>
     {
         Task<bool> CanDeleteCategory(int categoryId);
+        int TGetCategoryCount();
     }
 }

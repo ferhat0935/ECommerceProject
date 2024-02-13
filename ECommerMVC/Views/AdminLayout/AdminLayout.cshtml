@@ -199,11 +199,20 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                         <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
+                            <a href="/AdminCategory/GetCategories" class="nav-link">
                                 <i class="nav-icon fas fa-calendar-alt"></i>
                                 <p>
                                     Kategoriler
-                                    <span class="badge badge-info right">Count</span>
+                                    <span class="badge badge-info right">@ViewBag.CategoryCount</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/AdminProducts/GetProducts" class="nav-link">
+                                <i class="nav-icon fas fa-calendar-alt"></i>
+                                <p>
+                                    Ürünler
+                                    @* <span class="badge badge-info right">@ViewBag.CategoryCount</span> *@
                                 </p>
                             </a>
                         </li>
@@ -217,21 +226,10 @@
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <div class="content-header">
-                <div class="container-fluid">
-                 @*    <div class="row mb-2">
-                        <div class="col-sm-6">
-                           
-                        </div><!-- /.col -->
-                        <div class="col-sm-6">
-                            <ol class="breadcrumb float-sm-right">
-                                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            </ol>
-                        </div><!-- /.col -->
-                    </div><!-- /.row --> *@
-                </div><!-- /.container-fluid -->
+              
+                <div class ="container-fluid"></div>
             </div>
-            <!-- /.content-header -->
-            <!-- Main content -->
+         
            @RenderBody()
             <!-- /.content -->
         </div>
@@ -244,7 +242,7 @@
         <!-- /.control-sidebar -->
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+            <strong>Copyright &copy; 2014-2021 <a href="ferhatsolmaz.com">Ferhat Solmaz</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
                 <b>Version</b> 3.2.0
@@ -275,5 +273,23 @@
     <script src="~/AdminLTE-3.2.0/dist/js/demo.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="~/AdminLTE-3.2.0/dist/js/pages/dashboard2.js"></script>
+
+
+    @* CheckBox Kontrol *@
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.getElementById('exampleCheck1');
+
+            checkbox.addEventListener('change', function () {
+
+                if (checkbox.checked) {
+                    document.getElementById('Status').value = 1;
+                } else {
+
+                    document.getElementById('Status').value = 0; //
+                }
+            });
+        });
+    </script>
 </body>
 </html>

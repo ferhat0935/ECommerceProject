@@ -1,5 +1,5 @@
 ﻿using ECommerce.Common.Helpers;
-using ECommerce.DtoLayer.DTOS;
+using ECommerce.DtoLayer.DTOS.ProductDtos;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.ViewComponents.Default
 {
-	public class _Modal1Partial : ViewComponent
+    public class _Modal1Partial : ViewComponent
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
 		public _Modal1Partial(IHttpClientFactory httpClientFactory)

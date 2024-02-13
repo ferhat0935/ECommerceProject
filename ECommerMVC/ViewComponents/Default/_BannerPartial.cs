@@ -1,6 +1,6 @@
 ﻿
 using ECommerce.Common.Enums;
-using ECommerce.DtoLayer.DTOS;
+using ECommerce.DtoLayer.DTOS.ProductDtos;
 using ECommerceMVC.DTO.CategoryDto;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ECommerceMVC.ViewComponents.Default
 {
-	public class _BannerPartial:ViewComponent
+    public class _BannerPartial:ViewComponent
 	{
 		private readonly IHttpClientFactory _httpClientFactory;
 

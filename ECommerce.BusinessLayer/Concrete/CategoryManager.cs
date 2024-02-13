@@ -68,5 +68,10 @@ namespace ECommerce.BusinessLayer.Concrete
         {
             _categoryDal.Update(entity);
         }
+
+        public int TGetCategoryCount()
+        {
+            return _categoryDal.GetCategoryCount();
+        }
     }
 }

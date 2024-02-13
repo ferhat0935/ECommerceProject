@@ -3,7 +3,7 @@ using ECommerce.Common;
 using ECommerce.Common.Enums;
 using ECommerce.DataAccessLayer.Abstract;
 using ECommerce.DataAccessLayer.Context;
-using ECommerce.DtoLayer.DTOS;
+using ECommerce.DtoLayer.DTOS.ProductDtos;
 using ECommerce.EntityLayer.Concrete;
 using LinqKit;
 using System;
@@ -29,10 +29,9 @@ namespace ECommerce.BusinessLayer.Concrete
             var productPredicate = PredicateBuilder.New<Product>(x => x.IsActive);
             Expression<Func<Product, object>>[] includeProperties = { p => p.Categories, s => s.Size, c => c.Color };
 
-            if (productId != null)
-            {
-                productPredicate = productPredicate.And(s => s.ProductId.Equals(productId));
-            }
+            
+            productPredicate = productPredicate.And(s => s.ProductId.Equals(productId));
+          
 
             var product = await _productDal.FilterAsyncData(productPredicate, includeProperties);
 
@@ -50,7 +49,7 @@ namespace ECommerce.BusinessLayer.Concrete
                 Price = product.Price,
                 CategoryId = product.CategoryId,
                 Description = product.Description,
-                CategoryName = product.Categories?.CategoryName, // Güvenlik amacıyla null kontrolü eklenmiştir.
+                CategoryName = product.Categories?.CategoryName, 
                 Genders = product.Genders,
                 Color = product.Color,
                 Size = product.Size
@@ -108,7 +107,8 @@ namespace ECommerce.BusinessLayer.Concrete
                 CategoryName = p.Categories.CategoryName,
                 Genders=p.Genders,
                 Color = p.Color,
-                Size = p.Size
+                Size = p.Size,
+                CreatedDate = p.CreatedDate
                 
               
               
