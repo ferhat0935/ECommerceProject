@@ -2,12 +2,15 @@
 using ECommerce.DtoLayer.DTOS.ProductDtos;
 using ECommerce.EntityLayer.Concrete;
 using ECommerceMVC.DTO.CategoryDto;
+using ECommerceMVC.DTO.ParameterDefinitionDto;
 using ECommerceMVC.DTO.ProductDto;
 using ECommerceMVC.Models.ProductModel;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -58,15 +61,16 @@ namespace ECommerceMVC.Controllers
             {
                 var client = _httpClientFactory.CreateClient();
 
-                var colorResponse = await client.GetAsync("http://localhost:53239/api/Default/ListColor");
-                List<ParamaterDefinitionDto> colorList = new List<ParamaterDefinitionDto>();
-                var jsonData = await colorResponse.Content.ReadAsStringAsync();
-                colorList = JsonConvert.DeserializeObject<List<ParamaterDefinitionDto>>(jsonData);
-
-                var sizeResponse = await client.GetAsync("http://localhost:53239/api/Default/ListSize");
-                List<ParamaterDefinitionDto> sizeList = new List<ParamaterDefinitionDto>();
-                var sizeData = await sizeResponse.Content.ReadAsStringAsync();
-                sizeList = JsonConvert.DeserializeObject<List<ParamaterDefinitionDto>>(sizeData);
+                var responseParameter = await client.GetAsync("http://localhost:53239/api/Default/ListParameter");
+                responseParameter.EnsureSuccessStatusCode();
+                var parameterData = await responseParameter.Content.ReadAsStringAsync();
+                var parameterDto = JsonConvert.DeserializeObject<List<ParamaterDefinitionDto>>(parameterData);
+                
+                var resultDto = new ResultParameterDefinitionDto
+                {
+                    ColorList = parameterDto.Where(d => d.ParameterGroupName == "Color").ToList(),
+                    SizeList = parameterDto.Where(d => d.ParameterGroupName == "Size").ToList()
+                };
 
                 var responseProductFilter = await client.GetAsync($"http://localhost:53239/api/Product/{id}");
                 responseProductFilter.EnsureSuccessStatusCode();
@@ -83,8 +87,8 @@ namespace ECommerceMVC.Controllers
                 {
                     UpdateProductDto = productFilterDto,
                     Categories = categoryDtos,
-                    ColorList = colorList,
-                    SizeList = sizeList,
+                    ColorList=resultDto.ColorList,
+                    SizeList=resultDto.SizeList,
 
                 };
 
@@ -92,9 +96,7 @@ namespace ECommerceMVC.Controllers
             }
             catch (Exception ex)
             {
-                // Hata durumunu ele al
-                // Loglama veya uygun bir hata mesajı döndürme işlemleri yapılabilir
-                return RedirectToAction("Error", "Home"); // Örnek bir hata yönlendirmesi
+                return RedirectToAction("GetProducts", "AdminProducts"); 
             }
         }
 

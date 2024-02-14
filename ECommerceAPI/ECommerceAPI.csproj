@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ECommerce.BusinessLayer\ECommerce.BusinessLayer.csproj" />
+    <ProjectReference Include="..\ECommerMVC\ECommerceMVC.csproj" />
   </ItemGroup>
 
 </Project>

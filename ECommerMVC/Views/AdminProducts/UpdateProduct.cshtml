@@ -27,7 +27,6 @@
                 <div class="form-group">
                     <label>Kategori</label>
                     <select id="categoryDropdown" name="UpdateProductDto.CategoryId" class="form-control DropdownList">
-                        <option value="">-- Kategori Seçin --</option>
                         @foreach (var category in Model.Categories)
                         {
                             <option value="@category.CategoryId">@category.CategoryName</option>
@@ -55,7 +54,6 @@
                 <div class="form-group">
                     <label>Cinsiyet</label>
                     <select name="UpdateProductDto.Genders" class="form-control">
-                        <option value="">-- Seçiniz --</option>
                         @foreach (var gender in Enum.GetValues(typeof(Gender)))
                         {
                             <option value="@gender">@gender</option>
@@ -67,7 +65,6 @@
                 <div class="form-group">
                     <label>Renk</label>
                     <select id="colorSelect" name="UpdateProductDto.ColorId" class="form-control">
-                        <option value="">-- Renk Seçiniz --</option>
                         @foreach (var color in Model.ColorList)
                         {
                             <option value="@color.Id">@color.ParameterValue</option>
@@ -80,7 +77,6 @@
                 <div class="form-group">
                     <label>Beden</label>
                     <select id="selectedSize" name="UpdateProductDto.SizeId" class="form-control">
-                        <option value="">-- Beden Seçiniz --</option>
                         @foreach (var size in Model.SizeList)
                         {
                             <option value="@size.Id">@size.ParameterValue</option>

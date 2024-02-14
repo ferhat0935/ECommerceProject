@@ -1,5 +1,6 @@
 ﻿using ECommerce.BusinessLayer.Abstract;
 using ECommerce.DataAccessLayer.Abstract;
+using ECommerce.DtoLayer.DTOS;
 using ECommerce.EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,31 @@ namespace ECommerce.BusinessLayer.Concrete
 			_parametersDefinitonDal = parametersDefinitonDal;
 		}
 
-		public async Task<List<ParameterDefinition>> GetParameters(string parameterCode)
-		{
-			var data = await _parametersDefinitonDal.FilterAsync(s => s.ParameterGroupName == parameterCode);
-			return data.ToList();
-		}
+        public async Task<List<ParamaterDefinitionDto>> GetColorSize(string parameterColor, string parameterSize)
+        {
+            var result = await _parametersDefinitonDal.FilterAsync(s => s.ParameterGroupName == "Color" || s.ParameterGroupName == "Size");
+
+            var data = result
+                .Select(s => new ParamaterDefinitionDto
+                {
+                    Id = s.Id,
+                    ParameterGroupName = s.ParameterGroupName,
+                    ParameterName = s.ParameterName,
+                    ParameterValue = s.ParameterValue,
+                    ColorCode = s.ColorCode,
+                    IsActive = s.IsActive,
+                })
+                .ToList();
+
+            return data;
+        }
+
+
+  //      public async Task<List<ParameterDefinition>> GetParameters(string parameterCode)
+		//{
+		//	var data = await _parametersDefinitonDal.FilterAsync(s => s.ParameterGroupName == parameterCode);
+		//	return data.ToList();
+		//}
 
 		public void TCreate(ParameterDefinition entity)
 		{

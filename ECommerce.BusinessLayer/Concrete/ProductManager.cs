@@ -37,8 +37,7 @@ namespace ECommerce.BusinessLayer.Concrete
 
             if (product == null)
             {
-                // Eğer ürün bulunamazsa, isteğe bağlı olarak bir hata işleme stratejisi uygulayabilirsiniz.
-                // Örneğin: throw new NotFoundException("Ürün bulunamadı");
+            
                 return null;
             }
 
@@ -89,10 +88,13 @@ namespace ECommerce.BusinessLayer.Concrete
 
             if (endPrice.HasValue)
                 productPredicate.And(s => s.Price <= endPrice.Value);
+            productPredicate = productPredicate.Or(x => x.IsActive == true);
 
-		
+         
+            productPredicate = productPredicate.Or(x => x.IsActive == false);
 
-			if (!string.IsNullOrEmpty(name))
+
+            if (!string.IsNullOrEmpty(name))
                 productPredicate.Or(s => s.ProductName.Contains(name));
 
             var productRead = await _productDal.FilterAsync(productPredicate, includeProperties);
