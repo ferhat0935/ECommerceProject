@@ -52,7 +52,8 @@
                                             <td>@item.Size.ParameterValue</td>
                                             <td>@item.Color.ParameterValue</td>
                                             <td><a href="/AdminProducts/DeleteProduct/@item.ProductId" class="btn btn-block btn-danger">Sil</a></td>
-                                            <td><a href="/AdminProducts/UpdateProduct/@item.CategoryId" class="btn btn-block btn-warning">Güncelle</a></td>
+@*                                             <td><a href="/AdminProducts/UpdateProduct/@item.ProductId" class="btn btn-block btn-warning">Güncelle</a></td> *@
+                                            <td><a href="@Url.Action("UpdateProduct","AdminProducts",new {id=@item.ProductId})" class="btn btn-block btn-warning">Güncelle</a></td>
                                         </tr>
 
                                     </tbody>

@@ -1,4 +1,6 @@
 ﻿@using ECommerceMVC.Models.ProductModel
+@using ECommerce.Common.Enums
+
 @model UpdateProductViewModel
 
 @{
@@ -12,52 +14,92 @@
         <div class="card-header">
             <h3 class="card-title">Kategori Güncelleme</h3>
         </div>
-        <!-- /.card-header -->
-        <!-- form start -->
-        <form method="post">
+        <form method="post" action="/AdminProducts/UpdateProductDetail">
             <div class="card-body">
                 <div class="form-group">
-
-                    <input type="hidden" asp-for="UpdateProductDto.ProductName" class="form-control">
+                    <input type="hidden" name="UpdateProductDto.ProductId" value="@Model.UpdateProductDto.ProductId" class="form-control">
                 </div>
                 <div class="form-group">
                     <label>Ürün Adı</label>
-                    <input type="text" asp-for="UpdateProductDto.ProductName" class="form-control">
-                    <span asp-validation-for="UpdateProductDto.ProductName" class="text-danger"></span>
+                    <input type="text" name="UpdateProductDto.ProductName" value="@Model.UpdateProductDto.ProductName" class="form-control">
+                    <span class="text-danger">@Html.ValidationMessageFor(m => m.UpdateProductDto.ProductName)</span>
                 </div>
                 <div class="form-group">
                     <label>Kategori</label>
-                    <select class="js-select2" asp-for="UpdateProductDto.Categories.CategoryId" class="form-control">
+                    <select id="categoryDropdown" name="UpdateProductDto.CategoryId" class="form-control DropdownList">
                         <option value="">-- Kategori Seçin --</option>
                         @foreach (var category in Model.Categories)
                         {
                             <option value="@category.CategoryId">@category.CategoryName</option>
                         }
                     </select>
-                    <span asp-validation-for="UpdateProductDto.Categories.CategoryId" class="text-danger"></span>
+                    <span class="text-danger">@Html.ValidationMessageFor(m => m.UpdateProductDto.CategoryId)</span>
+                    <input type="hidden" id="selectedCategoryName" name="UpdateProductDto.CategoryName" value="" class="HiddenCategoryId" />
                 </div>
                 <div class="form-group">
                     <label>Fiyat</label>
-                    <input type="text" asp-for="UpdateProductDto.Price" class="form-control">
-                    <span asp-validation-for="UpdateProductDto.Price" class="text-danger"></span>
+                    <input type="text" name="UpdateProductDto.Price" value="@Model.UpdateProductDto.Price" class="form-control">
+                    <span class="text-danger">@Html.ValidationMessageFor(m => m.UpdateProductDto.Price)</span>
                 </div>
+
                 <div class="form-group">
                     <label>Açıklama</label>
-                    <input type="text" asp-for="UpdateProductDto.Description" class="form-control">
-                    <span asp-validation-for="UpdateProductDto.Description" class="text-danger"></span>
+                    <input type="text" name="UpdateProductDto.Description" value="@Model.UpdateProductDto.Description" class="form-control">
+                    <span class="text-danger">@Html.ValidationMessageFor(m => m.UpdateProductDto.Description)</span>
                 </div>
                 <div class="form-group">
                     <label>Stok Adedi</label>
-                    <input type="text" asp-for="UpdateProductDto.StockQuantity" class="form-control">
-                    <span asp-validation-for="UpdateProductDto.StockQuantity" class="text-danger"></span>
+                    <input type="text" name="UpdateProductDto.StockQuantity" value="@Model.UpdateProductDto.StockQuantity" class="form-control">
+                    <span class="text-danger">@Html.ValidationMessageFor(m => m.UpdateProductDto.StockQuantity)</span>
                 </div>
                 <div class="form-group">
                     <label>Cinsiyet</label>
-                    <input type="text" asp-for="UpdateProductDto.Genders" class="form-control">
-                    <span asp-validation-for="UpdateProductDto.Genders" class="text-danger"></span>
+                    <select name="UpdateProductDto.Genders" class="form-control">
+                        <option value="">-- Seçiniz --</option>
+                        @foreach (var gender in Enum.GetValues(typeof(Gender)))
+                        {
+                            <option value="@gender">@gender</option>
+                        }
+                    </select>
+                    <span class="text-danger">@Html.ValidationMessageFor(m => m.UpdateProductDto.Genders)</span>
                 </div>
-               
+
+                <div class="form-group">
+                    <label>Renk</label>
+                    <select id="colorSelect" name="UpdateProductDto.ColorId" class="form-control">
+                        <option value="">-- Renk Seçiniz --</option>
+                        @foreach (var color in Model.ColorList)
+                        {
+                            <option value="@color.Id">@color.ParameterValue</option>
+                        }
+                    </select>
+                    <input type="hidden" id="selectedColorId" value="" />
+                    <span class="text-danger">@Html.ValidationMessageFor(m => m.UpdateProductDto.ColorId)</span>
+                </div>
+
+                <div class="form-group">
+                    <label>Beden</label>
+                    <select id="selectedSize" name="UpdateProductDto.SizeId" class="form-control">
+                        <option value="">-- Beden Seçiniz --</option>
+                        @foreach (var size in Model.SizeList)
+                        {
+                            <option value="@size.Id">@size.ParameterValue</option>
+                        }
+                    </select>
+                    <input type="hidden" id="selectedSizeId" value="" />
+                    <span class="text-danger">@Html.ValidationMessageFor(m => m.UpdateProductDto.SizeId)</span>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="custom-control custom-checkbox">
+                        <input asp-for="UpdateProductDto.IsActive" class="custom-control-input" type="checkbox" id="customCheckbox1">
+                        <label for="customCheckbox1" class="custom-control-label">Aktif</label>
+                        <input asp-for="UpdateProductDto.IsActive" id="IsActive" type="hidden" />
+                    </div>
+                </div>
             </div>
+
             <!-- /.card-body -->
 
             <div class="card-footer">
@@ -66,4 +108,33 @@
         </form>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $("#customCheckbox1").prop('checked', true);
+    });
+
+    $('#categoryDropdown').change(function () {
+        var selectedCategoryName = $("#categoryDropdown option:selected").text();
+        $('#selectedCategoryName').val(selectedCategoryName);
+    });
+    $('#colorSelect').change(function () {
+        var selectedColorId = $("#colorSelect option:selected").val();
+        $('#selectedColorId').val(selectedColorId);
+    });
+    $('#selectedSize').change(function () {
+        var selectedSizeId = $("#selectedSize option:selected").val();
+        $('#selectedSizeId').val(selectedSizeId);
+    });
+    $('#customCheckbox1').change(function () {
+        debugger;
+        var tikliMi = $("#customCheckbox1").prop('checked') ? 1 : 0;
+        $("#IsActive").val(tikliMi);
+    });
+    
+
+
+</script>
+
 

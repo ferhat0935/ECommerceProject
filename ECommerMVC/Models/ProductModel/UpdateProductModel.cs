@@ -1,12 +1,9 @@
 ﻿using ECommerce.Common.Enums;
-using ECommerce.EntityLayer.Concrete;
-using ECommerceMVC.DTO.CategoryDto;
 using System;
-using System.Collections.Generic;
 
-namespace ECommerceMVC.DTO.ProductDto
+namespace ECommerceMVC.Models.ProductModel
 {
-    public class UpdateProductDto
+    public class UpdateProductModel
     {
         public int ProductId { get; set; }
         public int CategoryId { get; set; }
@@ -17,7 +14,7 @@ namespace ECommerceMVC.DTO.ProductDto
 
         public string Description { get; set; }
 
-        public DateTime CreatedDate { get; set; } 
+        public DateTime CreatedDate { get; set; }
 
         public int StockQuantity { get; set; }
 
@@ -36,6 +33,5 @@ namespace ECommerceMVC.DTO.ProductDto
 
         //public List<ResultCategoryDto> Category { get; set; }
 
-      
     }
 }

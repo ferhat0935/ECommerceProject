@@ -52,8 +52,8 @@ namespace ECommerceAPI.Controllers
         }
 
 
-        [HttpPut("UpdateProduct")]
-        public IActionResult UpdateCategory(Product product)
+        [HttpPut]
+        public IActionResult UpdateProduct(Product product)
         {
             _productService.TUpdate(product);
             return Ok();

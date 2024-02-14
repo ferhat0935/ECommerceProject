@@ -277,19 +277,19 @@
 
     @* CheckBox Kontrol *@
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            var checkbox = document.getElementById('exampleCheck1');
-
-            checkbox.addEventListener('change', function () {
-
-                if (checkbox.checked) {
-                    document.getElementById('Status').value = 1;
+        $(document).ready(function () {
+            $('#exampleCheck1').change(function () {
+                if ($(this).prop('checked')) {
+                    $('#Status').val(1);
                 } else {
-
-                    document.getElementById('Status').value = 0; //
+                    $('#Status').val(0);
                 }
             });
         });
+     
+
+
+
     </script>
 </body>
 </html>

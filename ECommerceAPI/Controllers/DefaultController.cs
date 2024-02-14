@@ -2,7 +2,7 @@
 using ECommerce.Common;
 
 using ECommerce.Common.Enums;
-using ECommerce.Common.Helpers;
+
 using ECommerce.DataAccessLayer.Context;
 using ECommerce.DtoLayer.DTOS;
 using ECommerce.EntityLayer.Concrete;
@@ -42,17 +42,17 @@ namespace ECommerceAPI.Controllers
 
 			return Ok(filteredProducts);
 		}
-        [HttpGet("FilterProducts")]
-        public async Task<IActionResult> GetProducts([FromQuery] int productId)
-        {
+		[HttpGet("FilterProducts")]
+		public async Task<IActionResult> GetProducts([FromQuery] int productId)
+		{
 
 
-            var filteredProducts = await _productService.GetProduct(productId);
+			var filteredProducts = await _productService.GetProduct(productId);
 
-            return Ok(filteredProducts);
-        }
+			return Ok(filteredProducts);
+		}
 
-        private Gender? ParseGender(string gender)
+		private Gender? ParseGender(string gender)
 		{
 			// İlgili string değeri Gender enum değerine çevirme
 			if (Enum.TryParse<Gender>(gender, true, out var parsedGender))
